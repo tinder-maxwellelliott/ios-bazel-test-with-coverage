@@ -1,0 +1,45 @@
+name: CI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: macos-latest
+
+    steps:
+      - name: Setup Java JDK
+        uses: actions/setup-java@v1.4.2
+        with:
+          java-version: 1.8
+        id: java
+      - name: Setup Go environment
+        uses: actions/setup-go@v2.1.2
+        with:
+          go-version: ^1.14
+        id: go
+      - name: Setup Ruby
+        # You may pin to the exact commit or the version.
+        # uses: ruby/setup-ruby@0effb2cc506cf040247c79dbfba54d93b11e3df8
+        uses: ruby/setup-ruby@v1.46.0
+        with:
+          ruby-version: 2.4.2
+      - name: Setup Bazelisk
+        run: go get github.com/bazelbuild/bazelisk
+      - uses: actions/checkout@v2
+      - name: Run Tests With Coverage
+        run: sh ./test_with_coverage.sh -e
+      - name: Coveralls GitHub Action
+        # You may pin to the exact commit or the version.
+        # uses: coverallsapp/github-action@8cbef1dea373ebce56de0a14c68d6267baa10b44
+        uses: coverallsapp/github-action@v1.1.2
+        with:
+          # 
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          # Path to lcov file
+          path-to-lcov: ./CoverageData/info.lcov
+          # Job flag name, e.g. "Unit", "Functional", or "Integration". Will be shown in the Coveralls UI.
+          flag-name: Unit
