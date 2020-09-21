@@ -25,6 +25,8 @@ jobs:
         # You may pin to the exact commit or the version.
         # uses: ruby/setup-ruby@0effb2cc506cf040247c79dbfba54d93b11e3df8
         uses: ruby/setup-ruby@v1.46.0
+        with:
+          ruby-version: 2.4.2
       - name: Setup Bazelisk
         run: go get github.com/bazelbuild/bazelisk
       - uses: actions/checkout@v2
