@@ -25,7 +25,7 @@ jobs:
         run: go get github.com/bazelbuild/bazelisk
       - uses: actions/checkout@v2
       - name: Run Tests With Coverage
-        run: ./test_with_coverage.sh -e
+        run: sh ./test_with_coverage.sh -e
       - name: Coveralls GitHub Action
         # You may pin to the exact commit or the version.
         # uses: coverallsapp/github-action@8cbef1dea373ebce56de0a14c68d6267baa10b44
