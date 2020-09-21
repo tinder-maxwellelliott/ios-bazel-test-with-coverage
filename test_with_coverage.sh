@@ -19,3 +19,5 @@ xcrun llvm-cov export \
     --format=lcov \
     "$(bazelisk info bazel-bin)/Tests/StringGeneratorUnitTests.__internal__.__test_bundle_archive-root/StringGeneratorUnitTests.xctest/StringGeneratorUnitTests" \
     > "$git_root/CoverageData/info.lcov"
+
+ruby format_lcov.rb
