@@ -2,13 +2,11 @@ git_root=$(git rev-parse --show-toplevel)
 
 mkdir -p "$git_root/CoverageData"
 
- bazelisk test \
+bazelisk coverage \
     --test_env="LLVM_PROFILE_FILE=\"$git_root/CoverageData/Coverage.profraw\"" \
-    --collect_code_coverage \
     --experimental_use_llvm_covmap \
     --spawn_strategy=standalone \
     --cache_test_results=no \
-    --apple_platform_type=ios \
     --test_env=LCOV_MERGER=/usr/bin/true \
     //Tests:StringGeneratorUnitTests
 
