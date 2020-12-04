@@ -10,4 +10,8 @@ public final class StringGenerator {
     public func createUUIDString() -> String {
         UUID().uuidString
     }
+
+    func anotherStringMethod() -> String {
+        ""
+    }
 }
